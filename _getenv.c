@@ -2,35 +2,35 @@
 
 /**
  * _getenv - function that gets the environment
- * @key: string pointer
- * Return: value
+ * @name: string pointer
+ * Return: token
  **/
-char *_getenv(char *key)
+char *_getenv(char *name)
 {
-	int cmp_result, i;
-	char *value, **env_copy;
+	int compare, i;
+	char *token, **env_copy;
 
-	env_copy = duplicate_env(environ);
+	env_copy = copy_env(environ);
 
 	for (i = 0; env_copy[i] != '\0'; i++)
 	{
-		value = strtok(env_copy[i], "=");
-		cmp_result = compare_strings(key, value);
-		if (cmp_result == 0)
+		token = strtok(env_copy[i], "=");
+		compare = _strcmp(name, token);
+		if (compare == 0)
 		{
-			value = strtok(NULL, "\0");
-			return (value);
+			token = strtok(NULL, "\0");
+			return (token);
 		}
 	}
 	return (NULL);
 }
 
 /**
- * duplicate_env - function that duplicates the environment
- * @original_env: environment to be duplicated
- * Return: duplicated environment as a double pointer
+ * copy_env - function that copies the environment
+ * @original_env: environment that passes through function
+ * Return: double ptr copy_env
  **/
-char **duplicate_env(char **original_env)
+char **copy_env(char **original_env)
 {
 	char **env_copy;
 	int env_len, i;
@@ -42,11 +42,11 @@ char **duplicate_env(char **original_env)
 		return (NULL);
 	for (i = 0; original_env[i] != NULL; i++)
 	{
-		env_copy[i] = malloc(sizeof(char) * length_of_string(original_env[i]) + 1);
+		env_copy[i] = malloc(sizeof(char) * _strlen(original_env[i]) + 1);
 		if (env_copy[i] == NULL)
 			return (NULL);
-		copy_string(env_copy[i], environ[i]);
+		_strcpy(env_copy[i], environ[i]);
 	}
 	return (env_copy);
-}
 
+}
