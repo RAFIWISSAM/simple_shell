@@ -4,21 +4,21 @@
  * @source: string 2
  * Return: concatenated string \n.
  */
-char *custom_strcat(char *destination, char *source)
+char *_strcat(char *dest, char *src)
 {
-	int dest_length = 0;
-	int source_index = 0;
+	int dest_len = 0;
+	int j = 0;
 
-	while (destination[dest_length])
-		dest_length++;
+	while (dest[dest_len])
+		dest_len++;
 
-	while (source[source_index])
+	while (src[j])
 	{
-		destination[dest_length] = source[source_index];
-		dest_length++;
-		source_index++;
+		dest[dest_len] = src[j];
+		dest_len++;
+		j++;
 	}
-	destination[dest_length] = '\0';
-	return (destination);
+	dest[dest_len] = '\0';
+	return (dest);
 }
 
