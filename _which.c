@@ -1,38 +1,37 @@
 #include "header.h"
 
 /**
- * check_permission - function that checks for user permission
- * @executable: files that need to be checked
+ * _which - function that checks for user permission
+ * @command: files that need to be checked
  * Return: NULL
  **/
-char *check_permission(char *executable)
+char *_which(char *command)
 {
-	char *search_path, *token, *path_tokenized = NULL;
-	char *path_copy = NULL;
+	char *path, *tokens, *store_pathtoks = NULL;
+	char *copy_path = NULL;
 	int i;
-	struct stat file_stats;
+	struct stat st;
 
-	search_path = get_environment_variable("PATH");
-	path_copy = duplicate_string(search_path);
+	path = _getenv("PATH");
+	copy_path = _strdup(path);
 
-	token = strtok(path_copy, ":");
-	for (i = 0; token != NULL; i++)
+	tokens = strtok(copy_path, ":");
+	for (i = 0; tokens != NULL; i++)
 	{
-		path_tokenized = malloc(sizeof(char) * 1024);
-		if (path_tokenized == NULL)
+		store_pathtoks = malloc(sizeof(char) * 1024);
+		if (store_pathtoks == NULL)
 			return (NULL);
-		set_memory(path_tokenized, 0, 1024);
-		copy_string(path_tokenized, token);
-		concatenate_string(path_tokenized, "/");
-		concatenate_string(path_tokenized, executable);
-		if (check_file_stat(path_tokenized, &file_stats) == 0)
+		_memset(store_pathtoks, 0, 1024);
+		_strcpy(store_pathtoks, tokens);
+		_strcat(store_pathtoks, "/");
+		_strcat(store_pathtoks, command);
+		if (stat(store_pathtoks, &st) == 0)
 		{
-			return (path_tokenized);
+			return (store_pathtoks);
 		}
-		token = strtok(NULL, ":");
-		free(path_tokenized);
-		path_tokenized = NULL;
+		tokens = strtok(NULL, ":");
+		free(store_pathtoks);
+		store_pathtoks = NULL;
 	}
 	return (NULL);
 }
-
