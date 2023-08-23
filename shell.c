@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_environment - Displays the environment variables.
+ * env - prints the environment variables
  */
 
 void env(void)
@@ -17,9 +17,9 @@ void env(void)
 }
 
 /**
- * check_whitespace - Checks if a string consists only of whitespace characters.
- * @str: The string to be checked
- * Return: 1 if the string contains only spaces or tabs, 0 otherwise
+ * trim_input - trim string
+ * @str: string to be trimmed
+ * Return: 1 if there only space or tab in string otherwise 0
  */
 int trim_input(char *str)
 {

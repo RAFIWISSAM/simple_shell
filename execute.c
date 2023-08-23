@@ -1,21 +1,21 @@
 #include "main.h"
 
 /**
- * execute - Forks a child process and runs the specified command.
+ * execute -> forks a child process and runs the specified command
  *
- * @arg: Array of arguments for the command
- * @full: Full path to the executable command
- * @line: The input command line
- * Return: Exit status of the forked process
+ * @arg: input
+ * @full: input
+ * @line: input
+ * Return: exit status of fork
  */
 
 int execute(char **arg, char *full, char *line)
 {
-	int pd = fork();
+	int pid = fork();
 	int status = 0;
 	int fork_status = 0;
 
-	if (pd == 0)
+	if (pid == 0)
 	{
 		if (execve(full, arg, NULL) == -1)
 		{

@@ -1,25 +1,24 @@
 #include "main.h"
 
 /**
- * bintest - Checks whether an executable path belongs to the /bin/ directory.
+ * bintest -> checks whether an executable path belongs to /bin/
  *
- * @bin: The input executable path to be tested
+ * @bin: input
  *
- * Return: 1 if the path is within /bin/, 0 otherwise
+ * Return: 1 on success and 0 on failure
  */
 
-
-int bintst(char *bin)
+int bintest(char *bin)
 {
-	char *tst = "/bin/";
+	char *test = "/bin/";
 
-	while (*tst != '\0')
+	while (*test != '\0')
 	{
-		if (*tst != *bin)
+		if (*test != *bin)
 		{
 			return (0);
 		}
-		tst = tst + 1;
+		test = test + 1;
 		bin = bin + 1;
 	}
 	return (1);
@@ -27,11 +26,12 @@ int bintst(char *bin)
 
 
 /**
- * _path - Constructs a full path for an executable based on input conditions.
+ * _path -> constructs a full path for an executable
  *
- * @bin: The input executable name or path
- * @path: The environment PATH variable
- * @full: Pointer to store the constructed full path
+ * @bin: input
+ * @path: input
+ * @full: input
+ *
  */
 
 void _path(char *bin, char *path, char **full)
